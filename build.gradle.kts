@@ -6,6 +6,7 @@ plugins {
 	kotlin("jvm") version "1.6.21"
 	kotlin("plugin.spring") version "1.6.21"
 	kotlin("plugin.jpa") version "1.6.21"
+	id("org.jetbrains.kotlin.plugin.allopen") version "1.5.21"
 }
 
 group = "ms.kotlin"
@@ -40,6 +41,16 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.amqp:spring-rabbit-test")
 	testImplementation("org.springframework.security:spring-security-test")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+	implementation("org.passay:passay:1.6.1")
+
+	implementation("org.springframework.boot:spring-boot-starter-log4j2")
+	configurations {
+		all{
+			exclude(module = "spring-boot-starter-logging")
+		}
+	}
 }
 
 tasks.withType<KotlinCompile> {
@@ -51,4 +62,8 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+allOpen {
+	annotations("javax.persistence.Entity", "javax.persistence.MappedSuperclass", "javax.persistence.Embedabble")
 }
