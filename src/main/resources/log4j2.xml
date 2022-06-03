@@ -5,17 +5,25 @@
         </Property>
     </Properties>
     <Appenders>
+
+        <RollingFile name="file" fileName="logs/battleship.log" filePattern="logs/battleship-%d{yyyy-MM-dd}_%i.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB"/>ls
+            </Policies>
+            <DefaultRolloverStrategy max="100"/>
+        </RollingFile>
+
         <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
             <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="ms.kotlin.battleships" level="debug" additivity="false">
-            <AppenderRef ref="ConsoleAppender" />
-        </Logger>
 
         <Root level="info">
-            <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="ConsoleAppender" level="debug"/>
+            <AppenderRef ref="file" level="debug"/>
         </Root>
     </Loggers>
 </Configuration>
