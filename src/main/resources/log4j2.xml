@@ -10,7 +10,7 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="pl.ms.saper.SaperApplication" level="debug" additivity="false">
+        <Logger name="ms.kotlin.battleships" level="debug" additivity="false">
             <AppenderRef ref="ConsoleAppender" />
         </Logger>
 
