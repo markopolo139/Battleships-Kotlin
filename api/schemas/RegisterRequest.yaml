@@ -1,0 +1,17 @@
+description: Represents a register payload
+properties:
+  name:
+    type: string
+    minLength: 5
+    maxLength: 20
+    x-size-error: Nazwa użytkownika musi miec od 5 do 20 znaków
+  password:
+    ref: "Password.yaml"
+  email:
+    type: string
+    pattern: ^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$
+    x-pattern-error: Nieprawidłowy adres email
+required:
+  - name
+  - email
+  - password

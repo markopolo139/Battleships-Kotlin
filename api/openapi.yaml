@@ -1,0 +1,32 @@
+openapi: 3.0.3
+info:
+  title: Battleships
+  description: Battleships copy
+  version: 0.1.0
+servers:
+  - url: http://localhost:4200
+    description: development server
+
+components:
+  securitySchemes:
+    $ref: "./securitySchemes/index.yaml"
+
+  schemas:
+    $ref: "./schemas/index.yaml"
+
+  requestBodies:
+    $ref: "./requestBodies/index.yaml"
+
+  responses:
+    $ref: "./responses/index.yaml"
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: authentication
+  - name: users
+
+paths:
+  /auth:
+    $ref: "./paths/auth.yaml"

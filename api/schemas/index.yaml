@@ -1,0 +1,41 @@
+Position:
+  $ref: "Position.yaml"
+
+Id:
+  $ref: "Id.yaml"
+
+ApiError:
+  $ref: "ApiError.yaml"
+
+ApiSubError:
+  $ref: "ApiSubError.yaml"
+
+AuthenticationRequest:
+  $ref: "AuthenticationRequest.yaml"
+
+ChangePasswordRequest:
+  $ref: "ChangePasswordRequest.yaml"
+
+JwtToken:
+  $ref: "JwtToken.yaml"
+
+Password:
+  $ref: "Password.yaml"
+
+RegisterRequest:
+  $ref: "RegisterRequest.yaml"
+
+SendEmail:
+  $ref: "SendEmail.yaml"
+
+Ship:
+  $ref: "Ship.yaml"
+
+ShipElement:
+  $ref: "ShipElement.yaml"
+
+Shot:
+  $ref: "Shot.yaml"
+
+ShotType:
+  $ref: "ShotType.yaml"

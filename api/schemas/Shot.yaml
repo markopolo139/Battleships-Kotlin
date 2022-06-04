@@ -1,0 +1,9 @@
+description: Represents one element of a ship
+properties:
+  position:
+    ref: "Position.yaml"
+  shotType:
+    ref: "ShotType.yaml"
+required:
+  - position
+  - shotType

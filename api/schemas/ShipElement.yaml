@@ -1,0 +1,6 @@
+description: Represents one element of a ship
+properties:
+  position:
+    ref: "Position.yaml"
+required:
+  - position

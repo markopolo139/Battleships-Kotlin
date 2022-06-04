@@ -1,0 +1,9 @@
+description: Defines type of shot
+properties:
+  shotType:
+    type: string
+    enum:
+      - 'HIT'
+      - 'MISS'
+required:
+  - shotType

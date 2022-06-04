@@ -1,0 +1,8 @@
+description: Represents of a ship
+properties:
+  shipElements:
+    type: array
+    items:
+      $ref: "ShipElement.yaml"
+required:
+  - shipElements
