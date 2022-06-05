@@ -42,3 +42,9 @@ ShotType:
 
 ShipList:
   $ref: "ShipList.yaml"
+
+ShotList:
+  $ref: "ShotList.yaml"
+
+GameType:
+  $ref: "GameType.yaml"

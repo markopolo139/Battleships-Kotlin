@@ -1,0 +1,6 @@
+description: Represents list of shots
+properties:
+  ships:
+    type: array
+    items:
+      $ref: "Shot.yaml"
