@@ -1,0 +1,12 @@
+summary: Allows for obtaining authentication token
+post:
+  operationId: auth
+  tags:
+    - authentication
+  requestBody:
+    $ref: "../requestBodies/AuthenticateRequestBody.yaml"
+  responses:
+    '200':
+      $ref: "../responses/TokenResponse.yaml"
+    default:
+      $ref: "../responses/ApiErrorResponse.yaml"

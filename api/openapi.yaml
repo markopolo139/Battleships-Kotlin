@@ -26,7 +26,18 @@ security:
 tags:
   - name: authentication
   - name: users
-
+  - name: game
+  - name: game status
+  - name: recovery password
 paths:
   /auth:
     $ref: "./paths/auth.yaml"
+
+  /register:
+    $ref: "./paths/register.yaml"
+
+  /changepwd:
+    $ref: "./paths/changePassword.yaml"
+
+  /recoverpwd:
+    $ref: "./paths/recoverPassword.yaml"

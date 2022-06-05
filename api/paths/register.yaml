@@ -1,0 +1,12 @@
+summary: Allows registering new user
+post:
+  operationId: register
+  tags:
+    - users
+  requestBody:
+    $ref: "../requestBodies/CreateUserRequestBody.yaml"
+  responses:
+    '200':
+      description: New user created
+    default:
+      $ref: "../responses/ApiErrorResponse.yaml"
