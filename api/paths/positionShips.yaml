@@ -1,0 +1,12 @@
+summary: Allows for positioning of ships on board
+post:
+  operationId: positionShips
+  tags:
+    - game
+  requestBody:
+    $ref: "../requestBodies/ShipPlacementRequestBody.yaml"
+  responses:
+    '200':
+      description: Ships are placed on board
+    default:
+      $ref: "../responses/ApiErrorResponse.yaml"

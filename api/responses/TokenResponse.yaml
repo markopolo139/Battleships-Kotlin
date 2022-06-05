@@ -1,4 +1,4 @@
-description: A response containing authentication token
+description: A response containing token
 content:
   application/json:
     schema:

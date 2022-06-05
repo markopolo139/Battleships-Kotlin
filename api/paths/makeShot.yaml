@@ -1,0 +1,12 @@
+summary: Allows for making shot in game
+post:
+  operationId: makeShot
+  tags:
+    - game
+  requestBody:
+    $ref: "../requestBodies/PositionRequestBody.yaml"
+  responses:
+    '200':
+      description: Shot was made
+    default:
+      $ref: "../responses/ApiErrorResponse.yaml"

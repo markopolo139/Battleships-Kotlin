@@ -41,3 +41,12 @@ paths:
 
   /recoverpwd:
     $ref: "./paths/recoverPassword.yaml"
+
+  /make/shot:
+    $ref: "./paths/makeShot.yaml"
+
+  /position/ships:
+    $ref: "./paths/positionShips.yaml"
+
+  /join/game:
+    $ref: "./paths/joinGame.yaml"

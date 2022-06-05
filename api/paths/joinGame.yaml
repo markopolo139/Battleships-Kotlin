@@ -1,0 +1,22 @@
+summary: Allows for joining game and creating join game token
+post:
+  operationId: joinGame
+  tags:
+    - game
+  requestBody:
+    $ref: "../requestBodies/JoinGameRequestBody.yaml"
+  responses:
+    '200':
+      description: Joined to another player
+    default:
+      $ref: "../responses/ApiErrorResponse.yaml"
+
+get:
+  operationId: createJoinGameToken
+  tags:
+    - game
+  responses:
+    '200':
+      $ref: "../responses/TokenResponse.yaml"
+    default:
+      $ref: "../responses/ApiErrorResponse.yaml"
