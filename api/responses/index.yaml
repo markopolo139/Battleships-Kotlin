@@ -1,0 +1,17 @@
+ApiErrorResponse:
+  $ref: "ApiErrorResponse.yaml"
+
+CurrentTurnResponse:
+  $ref: "CurrentTurnResponse.yaml"
+
+GameTypeResponse:
+  $ref: "GameTypeResponse.yaml"
+
+ShipListResponse:
+  $ref: "ShipListResponse.yaml"
+
+ShotListResponse:
+  $ref: "ShotListResponse.yaml"
+
+TokenResponse:
+  $ref: "TokenResponse.yaml"

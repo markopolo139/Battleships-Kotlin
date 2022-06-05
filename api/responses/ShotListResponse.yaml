@@ -1,0 +1,5 @@
+description: A response containing shot list
+content:
+  application/json:
+    schema:
+      $ref: "../schemas/ShotList.yaml"
