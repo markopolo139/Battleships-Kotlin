@@ -39,3 +39,6 @@ Shot:
 
 ShotType:
   $ref: "ShotType.yaml"
+
+ShipList:
+  $ref: "ShipList.yaml"

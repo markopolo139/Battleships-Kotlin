@@ -1,0 +1,6 @@
+description: Represents list of ships
+properties:
+  ships:
+    type: array
+    items:
+      $ref: "Ship.yaml"

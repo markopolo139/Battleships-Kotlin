@@ -1,4 +1,4 @@
-description: Response sent upon sucessfull authentication
+description: Jwt token used in authentication, joining game and password recovery
 properties:
   token:
     type: string
