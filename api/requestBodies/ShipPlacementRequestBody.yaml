@@ -1,0 +1,10 @@
+description: Send position of ships to place
+content:
+  application/json:
+    schema:
+      type: array
+      items:
+        type: array
+        items:
+          $ref: "../schemas/Position.yaml"
+required: true

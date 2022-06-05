@@ -1,0 +1,6 @@
+description: Body used for authenticating user
+content:
+  application/json:
+    schema:
+      $ref: "../schemas/AuthenticationRequest.yaml"
+required: true

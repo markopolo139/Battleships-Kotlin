@@ -1,0 +1,6 @@
+description: Send token needed for joining game with friend
+content:
+  application/json:
+    schema:
+      $ref: "../schemas/JwtToken.yaml"
+required: true

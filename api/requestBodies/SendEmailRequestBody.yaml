@@ -1,0 +1,6 @@
+description: Send email needed for recovery password
+content:
+  application/json:
+    schema:
+      $ref: "../schemas/SendEmail.yaml"
+required: true

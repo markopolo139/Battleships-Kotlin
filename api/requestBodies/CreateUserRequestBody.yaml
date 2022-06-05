@@ -1,0 +1,6 @@
+description: Body used for registering new user
+content:
+  application/json:
+    schema:
+      $ref: "../schemas/RegisterRequest.yaml"
+required: true

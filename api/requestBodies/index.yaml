@@ -1,0 +1,21 @@
+PositionRequestBody:
+  $ref: "PositionRequestBody.yaml"
+
+ShipPlacementRequestBody:
+  $ref: "ShipPlacementRequestBody.yaml"
+
+JoinGameRequestBody:
+  $ref: "JoinGameRequestBody.yaml"
+
+CreateUserRequestBody:
+  $ref: "CreateUserRequestBody.yaml"
+
+NewPasswordRequestBody:
+  $ref: "NewPasswordRequestBody.yaml"
+
+SendEmailRequestBody:
+  $ref: "SendEmailRequestBody.yaml"
+
+AuthenticateRequestBody:
+  $ref: "AuthenticateRequestBody.yaml"
+
