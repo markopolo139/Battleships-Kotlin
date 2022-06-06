@@ -21,3 +21,6 @@ PasswordResponse:
 
 IsWinResponse:
   $ref: "IsWinResponse.yaml"
+
+ShotResponse:
+  $ref: "ShotResponse.yaml"

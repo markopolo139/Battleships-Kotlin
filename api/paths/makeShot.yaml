@@ -7,6 +7,6 @@ post:
     $ref: "../requestBodies/PositionRequestBody.yaml"
   responses:
     '200':
-      description: Shot was made
+      $ref: "../responses/ShotResponse.yaml"
     default:
       $ref: "../responses/ApiErrorResponse.yaml"
