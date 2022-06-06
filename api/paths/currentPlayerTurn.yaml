@@ -1,0 +1,11 @@
+summary: Allows getting information about current player turn
+get:
+  operationId: currentPlayerTurn
+  tags:
+    - game status
+
+  responses:
+    '200':
+      $ref: "../responses/CurrentTurnResponse.yaml"
+    default:
+      $ref: "../responses/ApiErrorResponse.yaml"

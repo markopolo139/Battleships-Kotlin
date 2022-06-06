@@ -18,3 +18,6 @@ TokenResponse:
 
 PasswordResponse:
   $ref: "PasswordResponse.yaml"
+
+IsWinResponse:
+  $ref: "IsWinResponse.yaml"

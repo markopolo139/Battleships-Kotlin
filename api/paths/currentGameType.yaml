@@ -1,0 +1,11 @@
+summary: Allows getting information about current game type
+get:
+  operationId: currentGameType
+  tags:
+    - game status
+
+  responses:
+    '200':
+      $ref: "../responses/GameTypeResponse.yaml"
+    default:
+      $ref: "../responses/ApiErrorResponse.yaml"

@@ -50,3 +50,24 @@ paths:
 
   /join/game:
     $ref: "./paths/joinGame.yaml"
+
+  /ships:
+    $ref: "./paths/ships.yaml"
+
+  /enemy/sank/ships:
+    $ref: "./paths/enemyShips.yaml"
+
+  /shots:
+    $ref: "./paths/shots.yaml"
+
+  /enemy/shots:
+    $ref: "./paths/enemyShots.yaml"
+
+  /is/win:
+    $ref: "./paths/isWin.yaml"
+
+  /current/game/type:
+    $ref: "./paths/currentGameType.yaml"
+
+  /current/player/turn:
+    $ref: "./paths/currentPlayerTurn.yaml"

@@ -1,0 +1,5 @@
+description: A response containing game status
+content:
+  application/json:
+    schema:
+        type: boolean

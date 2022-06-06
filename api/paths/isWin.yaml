@@ -1,0 +1,11 @@
+summary: Allows getting information containing game status
+get:
+  operationId: isWin
+  tags:
+    - game status
+
+  responses:
+    '200':
+      $ref: "../responses/IsWinResponse.yaml"
+    default:
+      $ref: "../responses/ApiErrorResponse.yaml"

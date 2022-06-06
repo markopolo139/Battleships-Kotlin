@@ -1,0 +1,11 @@
+summary: Allows getting list of enemy shots
+get:
+  operationId: enemyShots
+  tags:
+    - game status
+
+  responses:
+    '200':
+      $ref: "../responses/ShotListResponse.yaml"
+    default:
+      $ref: "../responses/ApiErrorResponse.yaml"

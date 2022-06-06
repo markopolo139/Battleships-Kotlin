@@ -1,0 +1,11 @@
+summary: Allows getting list of user ships
+get:
+  operationId: ships
+  tags:
+    - game status
+
+  responses:
+    '200':
+      $ref: "../responses/ShipListResponse.yaml"
+    default:
+      $ref: "../responses/ApiErrorResponse.yaml"
