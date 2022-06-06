@@ -15,8 +15,4 @@ data class Position(
                 throw PositionOutOfRangeException(position, MINIMAL, MAXIMUM)
         }
     }
-
-    init {
-        validatePosition(this)
-    }
 }
