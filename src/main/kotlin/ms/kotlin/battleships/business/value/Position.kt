@@ -7,8 +7,8 @@ data class Position(
     val y: Int
 ) {
     companion object {
-        const val MINIMAL = 1
-        const val MAXIMUM = 10
+        private const val MINIMAL = 1
+        private const val MAXIMUM = 10
 
         fun validatePosition(position: Position) {
             if (position.x !in MINIMAL..MAXIMUM || position.y !in MINIMAL..MAXIMUM)
