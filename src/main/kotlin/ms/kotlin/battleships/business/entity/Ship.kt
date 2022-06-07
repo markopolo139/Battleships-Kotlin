@@ -3,6 +3,7 @@ package ms.kotlin.battleships.business.entity
 import ms.kotlin.battleships.business.exception.InvalidShipException
 import ms.kotlin.battleships.business.exception.ShipContinuityException
 import ms.kotlin.battleships.business.exception.ShipInvalidRowException
+import ms.kotlin.battleships.business.value.Position
 import ms.kotlin.battleships.business.value.ShipElement
 
 data class Ship(
@@ -12,6 +13,8 @@ data class Ship(
     fun validate() {
         if (shipElements.isEmpty())
             throw InvalidShipException("Ship does not have any ship elements")
+
+        shipElements.asSequence().map { it.position }.forEach { Position.validatePosition(it) }
 
         if (!isListDistinct())
             throw InvalidShipException("Ship does not have unique positions")
