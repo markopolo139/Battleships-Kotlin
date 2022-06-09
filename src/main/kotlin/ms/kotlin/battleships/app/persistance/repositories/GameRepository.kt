@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository
 interface GameRepository: JpaRepository<GameEntity, Int> {
 
     @Query("Select ge from GameEntity ge where ge.playerA.id = :id or ge.playerB.id = :id")
-    fun getByPlayerId(@Param(value = "id") playerId: Int)
+    fun getByPlayerId(@Param(value = "id") playerId: Int): GameEntity
 
 }
