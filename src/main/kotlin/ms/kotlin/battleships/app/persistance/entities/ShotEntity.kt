@@ -8,7 +8,7 @@ import javax.persistence.*
 class ShotEntity(
     @Id
     @GeneratedValue
-    @Column(name = "shot_id")
+    @Column(name = "shots_id")
     val id: Int,
 
     @Column(name = "pos_x")

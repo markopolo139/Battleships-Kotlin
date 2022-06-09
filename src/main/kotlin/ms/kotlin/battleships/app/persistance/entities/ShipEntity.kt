@@ -16,11 +16,11 @@ import javax.persistence.Table
 class ShipEntity(
     @Id
     @GeneratedValue
-    @Column(name = "ship_id")
+    @Column(name = "ships_id")
     val id: Int,
 
     @ElementCollection
-    @CollectionTable(name = "ship_elements", joinColumns = [JoinColumn(name = "ship_id")])
+    @CollectionTable(name = "ship_elements", joinColumns = [JoinColumn(name = "ships_id")])
     val shipElements: Set<ShipElementEmbeddable>
 ) {
 
