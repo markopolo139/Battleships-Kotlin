@@ -1,6 +1,5 @@
-package ms.kotlin.battleships.app.persistance.entities
+package ms.kotlin.battleships.app.persistence.entities
 
-import javax.management.monitor.StringMonitor
 import javax.persistence.*
 
 @Entity

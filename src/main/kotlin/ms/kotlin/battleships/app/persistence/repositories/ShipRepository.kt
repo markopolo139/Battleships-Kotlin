@@ -1,6 +1,6 @@
-package ms.kotlin.battleships.app.persistance.repositories
+package ms.kotlin.battleships.app.persistence.repositories
 
-import ms.kotlin.battleships.app.persistance.entities.ShipEntity
+import ms.kotlin.battleships.app.persistence.entities.ShipEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

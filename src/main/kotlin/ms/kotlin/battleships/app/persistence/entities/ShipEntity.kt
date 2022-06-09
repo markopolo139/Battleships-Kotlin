@@ -1,7 +1,6 @@
-package ms.kotlin.battleships.app.persistance.entities
+package ms.kotlin.battleships.app.persistence.entities
 
-import ms.kotlin.battleships.app.persistance.embedabble.ShipElementEmbeddable
-import org.aspectj.weaver.IntMap
+import ms.kotlin.battleships.app.persistence.embedabble.ShipElementEmbeddable
 import javax.persistence.CollectionTable
 import javax.persistence.Column
 import javax.persistence.ElementCollection

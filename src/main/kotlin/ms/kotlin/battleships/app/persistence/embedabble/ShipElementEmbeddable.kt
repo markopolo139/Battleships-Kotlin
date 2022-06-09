@@ -1,4 +1,4 @@
-package ms.kotlin.battleships.app.persistance.embedabble
+package ms.kotlin.battleships.app.persistence.embedabble
 
 import javax.persistence.Column
 import javax.persistence.Embeddable

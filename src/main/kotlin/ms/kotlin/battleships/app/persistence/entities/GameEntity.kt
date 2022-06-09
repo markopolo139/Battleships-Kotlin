@@ -1,4 +1,4 @@
-package ms.kotlin.battleships.app.persistance.entities
+package ms.kotlin.battleships.app.persistence.entities
 
 import ms.kotlin.battleships.business.value.GameType
 import javax.persistence.*
