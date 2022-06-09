@@ -5,9 +5,9 @@ USE Battleships
 
 CREATE TABLE players (
   players_id int NOT NULL primary key auto_increment,
-  username varchar(150) not null,
+  username varchar(150) not null unique,
   `password` varchar(150) not null,
-  email varchar(200) not null,
+  email varchar(200) not null unique,
   game_token varchar(400) null
 );
 
