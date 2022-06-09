@@ -21,7 +21,7 @@ class UserEntity(
     val email: String,
 
     @Column(name = "game_token")
-    val gameToken: String,
+    val gameToken: String?,
 
     @OneToMany
     @JoinColumn(name = "players_id", referencedColumnName = "players_id")
