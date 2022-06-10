@@ -19,15 +19,18 @@ class GameEntity(
 
     @OneToOne(cascade = [CascadeType.MERGE])
     @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @JoinColumn(name = "player_a_id")
     val playerA: UserEntity,
 
     @OneToOne(cascade = [CascadeType.MERGE])
     @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @JoinColumn(name = "player_b_id")
     val playerB: UserEntity,
 
     @OneToOne(cascade = [CascadeType.MERGE])
     @OnDelete(action = OnDeleteAction.NO_ACTION)
-    val currentTurnPlayer: UserEntity,
+    @JoinColumn(name = "current_player_id")
+    val currentPlayer: UserEntity,
 ) {
 
     override fun equals(other: Any?): Boolean {
