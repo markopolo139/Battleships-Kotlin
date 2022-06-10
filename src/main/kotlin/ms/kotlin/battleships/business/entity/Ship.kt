@@ -6,7 +6,7 @@ import ms.kotlin.battleships.business.exception.ShipInvalidRowException
 import ms.kotlin.battleships.business.value.Position
 import ms.kotlin.battleships.business.value.ShipElement
 
-data class Ship(
+open class Ship(
     val shipElements: List<ShipElement>
 ) {
 
@@ -55,5 +55,20 @@ data class Ship(
         shipElements.asSequence().map { it.position }.distinct().count() == shipElements.size
 
     private fun validateRow(modifiedList: List<Int>): Boolean = modifiedList.distinct().count() == 1
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Ship
+
+        if (shipElements != other.shipElements) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return shipElements.hashCode()
+    }
+
 
 }
