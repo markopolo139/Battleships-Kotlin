@@ -1,6 +1,8 @@
 package ms.kotlin.battleships.app.persistence.entities
 
 import ms.kotlin.battleships.business.value.GameType
+import org.hibernate.annotations.OnDelete
+import org.hibernate.annotations.OnDeleteAction
 import javax.persistence.*
 
 @Entity
@@ -15,13 +17,16 @@ class GameEntity(
     @Column(name = "game_type")
     val gameType: GameType,
 
-    @OneToOne
+    @OneToOne(cascade = [CascadeType.MERGE])
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     val playerA: UserEntity,
 
-    @OneToOne
+    @OneToOne(cascade = [CascadeType.MERGE])
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     val playerB: UserEntity,
 
-    @OneToOne
+    @OneToOne(cascade = [CascadeType.MERGE])
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     val currentTurnPlayer: UserEntity,
 ) {
 

@@ -22,11 +22,11 @@ class UserEntity(
     @Column(name = "game_token")
     val gameToken: String?,
 
-    @OneToMany
+    @OneToMany(cascade = [CascadeType.PERSIST, CascadeType.REMOVE])
     @JoinColumn(name = "players_id", referencedColumnName = "players_id")
     val ships: MutableSet<ShipEntity>,
 
-    @OneToMany
+    @OneToMany(cascade = [CascadeType.PERSIST, CascadeType.REMOVE])
     @JoinColumn(name = "players_id", referencedColumnName = "players_id")
     val shots: MutableSet<ShotEntity>,
 
