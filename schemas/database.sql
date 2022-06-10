@@ -13,9 +13,7 @@ CREATE TABLE players (
 
 CREATE TABLE ships(
     ships_id int not null primary key auto_increment,
-    players_id int not null,
-    key (players_id),
-    constraint ship_to_player foreign key (players_id) references players(players_id)
+    players_id int
 );
 
 CREATE TABLE ship_elements(
@@ -31,9 +29,7 @@ CREATE TABLE shots (
     pos_x int not null,
     pos_y int not null,
     type ENUM('HIT', 'MISS') not null,
-    players_id int not null,
-    key (players_id),
-    constraint shot_to_player foreign key (players_id) references players (players_id)
+    players_id int
 );
 
 CREATE TABLE games(
