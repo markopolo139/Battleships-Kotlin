@@ -22,17 +22,6 @@ class ShipTest {
             assertThrows<InvalidShipException> { emptyListShip.validate() }.message
         )
 
-        val notDistinctShip = Ship(setOf(
-            ShipElement(Position(1,1)),
-            ShipElement(Position(1,1)),
-            ShipElement(Position(1,2)),
-        ))
-
-        Assertions.assertEquals(
-            "Ship does not have unique positions",
-            assertThrows<InvalidShipException> { notDistinctShip.validate() }.message
-        )
-
         val notInOneRowShip = Ship(setOf(
             ShipElement(Position(1,1)),
             ShipElement(Position(2,2)),
