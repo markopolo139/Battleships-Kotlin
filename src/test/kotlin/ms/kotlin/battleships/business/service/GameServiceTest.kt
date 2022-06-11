@@ -21,16 +21,16 @@ class GameServiceTest {
     )
 
     private val notWinBoard = ShipBoard(
-        listOf(
+        setOf(
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(1,1)),
                     ShipElement(Position(2,1)),
                     ShipElement(Position(3,1))
                 )
             ),
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(3,2)),
                     ShipElement(Position(4,2)),
                     ShipElement(Position(5,2))
@@ -45,7 +45,7 @@ class GameServiceTest {
 
         Assertions.assertEquals(
             gameService.onlyNotSankShips(shotBoard, notWinBoard)[0], Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(3,2)),
                     ShipElement(Position(4,2)),
                     ShipElement(Position(5,2))
@@ -55,7 +55,7 @@ class GameServiceTest {
 
         Assertions.assertEquals(
             gameService.onlySankShips(shotBoard, notWinBoard)[0], Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(1,1)),
                     ShipElement(Position(2,1)),
                     ShipElement(Position(3,1))
@@ -84,9 +84,9 @@ class GameServiceTest {
     fun `test is win function`() {
 
         val winBoard = ShipBoard(
-            listOf(
+            setOf(
                 Ship(
-                    listOf(
+                    setOf(
                         ShipElement(Position(1,1)),
                         ShipElement(Position(2,1)),
                         ShipElement(Position(3,1))

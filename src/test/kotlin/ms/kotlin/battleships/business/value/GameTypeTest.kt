@@ -10,29 +10,29 @@ class GameTypeTest {
     @Test
     fun `test validation of ships layout`() {
 
-        val classicShips = listOf(
+        val classicShips = setOf(
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(1,1)),
                     ShipElement(Position(1,2)),
                 )
             ),
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(1,3)),
                     ShipElement(Position(1,4)),
                     ShipElement(Position(1,5)),
                 )
             ),
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(4,1)),
                     ShipElement(Position(4,2)),
                     ShipElement(Position(4,3)),
                 )
             ),
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(7,1)),
                     ShipElement(Position(8,1)),
                     ShipElement(Position(9,1)),
@@ -40,7 +40,7 @@ class GameTypeTest {
                 )
             ),
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(10,6)),
                     ShipElement(Position(10,7)),
                     ShipElement(Position(10,8)),
@@ -53,54 +53,54 @@ class GameTypeTest {
         Assertions.assertTrue(GameType.CLASSIC.validateLayout(classicShips))
         Assertions.assertFalse(GameType.RUSSIAN.validateLayout(classicShips))
 
-        val russianShips = listOf(
+        val russianShips = setOf(
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(1,1)),
                     ShipElement(Position(1,2)),
                 )
             ),
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(6,6)),
                     ShipElement(Position(6,7)),
                 )
             ),
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(1,8)),
                     ShipElement(Position(2,8)),
                 )
             ),
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(10,3)),
                     ShipElement(Position(10,4)),
                 )
             ),
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(4,1)),
                     ShipElement(Position(4,2)),
                     ShipElement(Position(4,3)),
                 )
             ),
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(6,3)),
                     ShipElement(Position(7,3)),
                     ShipElement(Position(8,3)),
                 )
             ),
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(10,6)),
                     ShipElement(Position(10,7)),
                     ShipElement(Position(10,8)),
                 )
             ),
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(7,1)),
                     ShipElement(Position(8,1)),
                     ShipElement(Position(9,1)),
@@ -108,7 +108,7 @@ class GameTypeTest {
                 )
             ),
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(1,3)),
                     ShipElement(Position(1,4)),
                     ShipElement(Position(1,5)),
@@ -116,7 +116,7 @@ class GameTypeTest {
                 )
             ),
             Ship(
-                listOf(
+                setOf(
                     ShipElement(Position(10,5)),
                     ShipElement(Position(10,6)),
                     ShipElement(Position(10,7)),

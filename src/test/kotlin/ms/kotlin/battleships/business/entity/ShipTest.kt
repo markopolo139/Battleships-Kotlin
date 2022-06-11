@@ -15,14 +15,14 @@ class ShipTest {
     @Test
     fun `test ship validation`() {
 
-        val emptyListShip = Ship(emptyList())
+        val emptyListShip = Ship(emptySet())
 
         Assertions.assertEquals(
             "Ship does not have any ship elements",
             assertThrows<InvalidShipException> { emptyListShip.validate() }.message
         )
 
-        val notDistinctShip = Ship(listOf(
+        val notDistinctShip = Ship(setOf(
             ShipElement(Position(1,1)),
             ShipElement(Position(1,1)),
             ShipElement(Position(1,2)),
@@ -33,7 +33,7 @@ class ShipTest {
             assertThrows<InvalidShipException> { notDistinctShip.validate() }.message
         )
 
-        val notInOneRowShip = Ship(listOf(
+        val notInOneRowShip = Ship(setOf(
             ShipElement(Position(1,1)),
             ShipElement(Position(2,2)),
             ShipElement(Position(1,2)),
@@ -43,7 +43,7 @@ class ShipTest {
             notInOneRowShip.validate()
         }
 
-        val invalidXRowShip = Ship(listOf(
+        val invalidXRowShip = Ship(setOf(
             ShipElement(Position(1,1)),
             ShipElement(Position(1,2)),
             ShipElement(Position(1,3)),
@@ -55,7 +55,7 @@ class ShipTest {
             invalidXRowShip.validate()
         }
 
-        val invalidYRowShip = Ship(listOf(
+        val invalidYRowShip = Ship(setOf(
             ShipElement(Position(1,1)),
             ShipElement(Position(2,1)),
             ShipElement(Position(3,1)),
