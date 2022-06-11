@@ -25,7 +25,7 @@ enum class GameType {
 
     abstract val layout: Map<Int, Int>
 
-    fun validateLayout(ships: List<Ship>): Boolean =
+    fun validateLayout(ships: Set<Ship>): Boolean =
         layout == ships.groupingBy { it.shipElements.size }.eachCount()
 
 }

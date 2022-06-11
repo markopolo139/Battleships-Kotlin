@@ -7,7 +7,7 @@ import ms.kotlin.battleships.business.value.Position
 import ms.kotlin.battleships.business.value.ShipElement
 
 open class Ship(
-    val shipElements: List<ShipElement>
+    val shipElements: Set<ShipElement>
 ) {
 
     fun validate() {

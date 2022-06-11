@@ -6,7 +6,7 @@ import ms.kotlin.battleships.business.value.Position
 import kotlin.math.abs
 
 class ShipBoard(
-    val ships: List<Ship>,
+    val ships: Set<Ship>,
     private val gameType: GameType
 ) {
 
