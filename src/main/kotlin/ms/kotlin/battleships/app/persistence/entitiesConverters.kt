@@ -6,7 +6,10 @@ import ms.kotlin.battleships.app.persistence.entities.GameEntity
 import ms.kotlin.battleships.app.persistence.entities.ShipEntity
 import ms.kotlin.battleships.app.persistence.entities.ShotEntity
 import ms.kotlin.battleships.app.persistence.entities.UserEntity
+import ms.kotlin.battleships.business.entity.ShipBoard
 import ms.kotlin.battleships.business.value.Position
+import org.springframework.security.core.userdetails.User
+import org.springframework.security.core.userdetails.UserDetails
 
 typealias AppUserEntity = ms.kotlin.battleships.app.security.UserEntity
 typealias AppShipEntity = ms.kotlin.battleships.app.entities.ShipEntity
@@ -22,14 +25,21 @@ fun AppShipEntity.toPersistence() = ShipEntity(id, shipElements.map { it as Ship
 fun ShotEntity.toEntity() = AppShotEntity(id, Position(x, y), shotType)
 fun AppShotEntity.toPersistence() = ShotEntity(id, position.x, position.y, shotType)
 
-fun UserEntity.toEntity() = AppUserEntity(
-    id, username, password, email, gameToken ?: "",
-    ships.map { it.toEntity() }.toSet(), shots.map { it.toEntity() }.toSet()
+fun UserDetails.toAppUser(id: Int, email: String, gameToken: String, shipBoard: Set<AppShipEntity>, shotBoard: Set<AppShotEntity>) =
+    AppUserEntity(
+        id, username, password, email, gameToken, shipBoard, shotBoard, authorities
 )
 
+fun UserEntity.toEntity() = User
+    .builder()
+    .username(username)
+    .password(password)
+    .roles(*roles.toTypedArray())
+    .build().toAppUser(id, email, gameToken ?: "", ships.map { it.toEntity() }.toSet(), shots.map { it.toEntity() }.toSet())
+
 fun AppUserEntity.toPersistence() = UserEntity(
-    id, username, password, email, gameToken.ifBlank { null },
-    shipBoard.map { it.toPersistence() }.toMutableSet(), shotBoard.map { it.toPersistence() }.toMutableSet()
+    id, username, password, email, gameToken.ifBlank { null }, shipBoard.map { it.toPersistence() }.toMutableSet(),
+    shotBoard.map { it.toPersistence() }.toMutableSet(), authorities.mapNotNull { it.authority.replace("ROLE_", "") }.toMutableSet()
 )
 
 fun GameEntity.toEntity() =
