@@ -1,17 +1,17 @@
 package ms.kotlin.battleships.app.security
 
-import ms.kotlin.battleships.app.entities.ShipEntity
-import ms.kotlin.battleships.app.entities.ShotEntity
+import ms.kotlin.battleships.app.entities.AppShipEntity
+import ms.kotlin.battleships.app.entities.AppShotEntity
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.User
 
-class UserEntity(
+class AppUserEntity(
     val id: Int,
     username: String,
     password: String,
     val email: String,
     val gameToken: String,
-    val shipBoard: Set<ShipEntity>,
-    val shotBoard: Set<ShotEntity>,
+    val shipBoard: Set<AppShipEntity>,
+    val shotBoard: Set<AppShotEntity>,
     authorities: Collection<GrantedAuthority>
 ): User(username, password, authorities)
