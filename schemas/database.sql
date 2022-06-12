@@ -11,6 +11,13 @@ CREATE TABLE players (
   game_token varchar(400) null
 );
 
+CREATE TABLE player_roles (
+  players_id int NOT NULL,
+  `role` varchar(150) not null,
+  key (players_id),
+  constraint role_to_player foreign key (players_id) references players(players_id)
+);
+
 CREATE TABLE ships(
     ships_id int not null primary key auto_increment,
     players_id int not null,
