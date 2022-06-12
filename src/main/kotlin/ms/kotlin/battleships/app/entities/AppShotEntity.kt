@@ -8,5 +8,4 @@ class AppShotEntity(
     val id: Int,
     position: Position,
     shotType: ShotType
-): Shot(position, shotType) {
-}
+): Shot(position, shotType)
