@@ -18,7 +18,7 @@ fun ShipElementEmbeddable.toEntity() = ShipElementEntity(Position(x, y))
 fun ShipElementEntity.toPersistence() = ShipElementEmbeddable(position.x, position.y)
 
 fun ShipEntity.toEntity() = AppShipEntity(id, shipElements.map { it.toEntity() }.toSet())
-fun AppShipEntity.toPersistence() = ShipEntity(id, shipElements.map { it as ShipElementEmbeddable }.toSet())
+fun AppShipEntity.toPersistence() = ShipEntity(id, shipElements.map { (it as ShipElementEntity).toPersistence() }.toSet())
 
 fun ShotEntity.toEntity() = AppShotEntity(id, Position(x, y), shotType)
 fun AppShotEntity.toPersistence() = ShotEntity(id, position.x, position.y, shotType)

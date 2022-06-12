@@ -37,8 +37,8 @@ class PersistenceTest {
         gameRepository.deleteAll()
         userRepository.deleteAll()
 
-        val playerA = UserEntity(0, "marek", "zsk", "test", null, mutableSetOf(), mutableSetOf())
-        val playerB = UserEntity(0, "kamil", "zsk", "test2", null, mutableSetOf(), mutableSetOf())
+        val playerA = UserEntity(0, "marek", "zsk", "test", null, mutableSetOf(), mutableSetOf(), mutableSetOf("ADMIN"))
+        val playerB = UserEntity(0, "kamil", "zsk", "test2", null, mutableSetOf(), mutableSetOf(), mutableSetOf())
 
         val shotSet = mutableSetOf(
             ShotEntity(1, 1,2, ShotType.MISS),
