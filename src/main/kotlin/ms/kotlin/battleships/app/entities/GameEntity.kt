@@ -1,5 +1,6 @@
 package ms.kotlin.battleships.app.entities
 
+import ms.kotlin.battleships.app.security.UserEntity
 import ms.kotlin.battleships.business.value.GameType
 
 data class GameEntity(

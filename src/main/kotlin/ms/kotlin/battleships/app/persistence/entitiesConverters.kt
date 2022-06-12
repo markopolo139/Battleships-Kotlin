@@ -8,7 +8,7 @@ import ms.kotlin.battleships.app.persistence.entities.ShotEntity
 import ms.kotlin.battleships.app.persistence.entities.UserEntity
 import ms.kotlin.battleships.business.value.Position
 
-typealias AppUserEntity = ms.kotlin.battleships.app.entities.UserEntity
+typealias AppUserEntity = ms.kotlin.battleships.app.security.UserEntity
 typealias AppShipEntity = ms.kotlin.battleships.app.entities.ShipEntity
 typealias AppShotEntity = ms.kotlin.battleships.app.entities.ShotEntity
 typealias AppGameEntity = ms.kotlin.battleships.app.entities.GameEntity
