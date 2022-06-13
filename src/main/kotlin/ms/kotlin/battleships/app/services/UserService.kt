@@ -17,7 +17,6 @@ class UserService: UserDetailsService {
     @Autowired
     private lateinit var  userRepository: UserRepository
 
-    //TODO: Maybe error not 0
     private val userId = (SecurityContextHolder.getContext().authentication as? AppUserEntity)?.id ?: 0
 
     override fun loadUserByUsername(username: String?): UserDetails {
