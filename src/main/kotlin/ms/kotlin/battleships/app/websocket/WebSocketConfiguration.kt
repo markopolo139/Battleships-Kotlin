@@ -21,12 +21,7 @@ class WebSocketConfiguration: WebSocketMessageBrokerConfigurer {
     }
 
     override fun configureMessageConverters(messageConverters: MutableList<MessageConverter>): Boolean {
-        val resolver = DefaultContentTypeResolver()
-        val messageConverter = MappingJackson2MessageConverter()
-        messageConverter.objectMapper = ObjectMapper()
-        messageConverter.contentTypeResolver = resolver
-        messageConverters.add(messageConverter)
-        return false
+        return true
     }
 
     override fun configureMessageBroker(registry: MessageBrokerRegistry) {
@@ -35,6 +30,7 @@ class WebSocketConfiguration: WebSocketMessageBrokerConfigurer {
         registry.setApplicationDestinationPrefixes("/app/v1")
     }
 
+    //TODO
     override fun configureClientInboundChannel(registration: ChannelRegistration) {
         super.configureClientInboundChannel(registration)
     }

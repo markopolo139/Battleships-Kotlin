@@ -42,6 +42,9 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
 	implementation("org.passay:passay:1.6.1")
 
+	implementation("com.fasterxml.jackson.core:jackson-databind:2.13.3")
+	implementation("com.fasterxml.jackson.core:jackson-core:2.13.3")
+
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
