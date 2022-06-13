@@ -47,4 +47,12 @@ class UserService: UserDetailsService {
         throw EmailNotFoundException(email)
     }
 
+    fun loadUserByUserId(userId: Int): UserDetails = try {
+        userRepository.findById(userId).get().toEntity()
+    }
+    catch (ex: NoSuchElementException) {
+        logger.error("User With given id is not found")
+        throw NoSuchElementException()
+    }
+
 }

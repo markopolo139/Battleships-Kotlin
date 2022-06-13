@@ -23,9 +23,9 @@ fun AppShipEntity.toPersistence() = ShipEntity(id, shipElements.map { (it as Shi
 fun ShotEntity.toEntity() = AppShotEntity(id, Position(x, y), shotType)
 fun AppShotEntity.toPersistence() = ShotEntity(id, position.x, position.y, shotType)
 
-fun UserDetails.toAppUser(id: Int, email: String, gameToken: String, shipBoard: Set<AppShipEntity>, shotBoard: Set<AppShotEntity>) =
+fun UserDetails.toAppUser(id: Int, email: String) =
     AppUserEntity(
-        id, username, password, email, gameToken, shipBoard, shotBoard, authorities
+        id, username, password, email, authorities
 )
 
 fun UserEntity.toEntity() = User
@@ -33,14 +33,7 @@ fun UserEntity.toEntity() = User
     .username(username)
     .password(password)
     .roles(*roles.toTypedArray())
-    .build().toAppUser(id, email, gameToken ?: "", ships.map { it.toEntity() }.toSet(), shots.map { it.toEntity() }.toSet())
-
-fun AppUserEntity.toPersistence() = UserEntity(
-    id, username, password, email, gameToken.ifBlank { null }, shipBoard.map { it.toPersistence() }.toMutableSet(),
-    shotBoard.map { it.toPersistence() }.toMutableSet(), authorities.mapNotNull { it.authority.replace("ROLE_", "") }.toMutableSet()
-)
+    .build().toAppUser(id, email)
 
 fun GameEntity.toEntity() =
     AppGameEntity(id, gameType, playerA.toEntity(), playerB.toEntity(), currentPlayer.toEntity())
-fun AppGameEntity.toPersistence() =
-    GameEntity(id, gameType, playerA.toPersistence(), playerB.toPersistence(), currentPlayer.toPersistence())

@@ -10,9 +10,6 @@ class AppUserEntity(
     username: String,
     password: String,
     val email: String,
-    val gameToken: String,
-    val shipBoard: Set<AppShipEntity>,
-    val shotBoard: Set<AppShotEntity>,
     authorities: Collection<GrantedAuthority>
 ): User(username, password, authorities) {
 
@@ -25,9 +22,6 @@ class AppUserEntity(
 
         if (id != other.id) return false
         if (email != other.email) return false
-        if (gameToken != other.gameToken) return false
-        if (shipBoard != other.shipBoard) return false
-        if (shotBoard != other.shotBoard) return false
 
         return true
     }
@@ -36,9 +30,6 @@ class AppUserEntity(
         var result = super.hashCode()
         result = 31 * result + id
         result = 31 * result + email.hashCode()
-        result = 31 * result + gameToken.hashCode()
-        result = 31 * result + shipBoard.hashCode()
-        result = 31 * result + shotBoard.hashCode()
         return result
     }
 }
