@@ -34,9 +34,6 @@ class PersistenceTest {
     @Test
     fun `persistence entity save test`() {
 
-        gameRepository.deleteAll()
-        userRepository.deleteAll()
-
         val playerA = UserEntity(0, "marek", "zsk", "test", null, mutableSetOf(), mutableSetOf(), mutableSetOf("ADMIN"))
         val playerB = UserEntity(0, "kamil", "zsk", "test2", null, mutableSetOf(), mutableSetOf(), mutableSetOf())
 
@@ -73,6 +70,8 @@ class PersistenceTest {
             gameRepository.save(GameEntity(0, GameType.CLASSIC, playerA, playerB, playerA))
         }
 
+        gameRepository.deleteAll()
+        userRepository.deleteAll()
 
     }
 

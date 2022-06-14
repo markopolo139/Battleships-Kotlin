@@ -56,3 +56,5 @@ CREATE TABLE games(
     constraint player_b_to_players foreign key (player_b_id) references players(players_id),
     constraint current_player_to_players foreign key (current_player_id) references players(players_id)
 );
+
+insert into players values (1,'marek', '$2a$12$G//VXe476Iw53pjiWCOeTeYCbGUMGmOxu4HykQ7Q1ndjOzke5NMtu','marekseget@onet.pl',null);
