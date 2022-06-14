@@ -35,7 +35,7 @@ class UserService: UserDetailsService {
         }
         catch (ex: UsernameNotFoundException) {
             logger.error("Username $username, can't be found in the base")
-            throw UsernameNotFoundException(username)
+            throw ex
         }
     }
 
@@ -44,7 +44,7 @@ class UserService: UserDetailsService {
     }
     catch (ex: EmailNotFoundException) {
         logger.error("Email $email, can't be found in the base")
-        throw EmailNotFoundException(email)
+        throw ex
     }
 
     fun loadUserByUserId(userId: Int): UserDetails = try {
@@ -52,7 +52,7 @@ class UserService: UserDetailsService {
     }
     catch (ex: NoSuchElementException) {
         logger.error("User With given id is not found")
-        throw NoSuchElementException()
+        throw ex
     }
 
 }
