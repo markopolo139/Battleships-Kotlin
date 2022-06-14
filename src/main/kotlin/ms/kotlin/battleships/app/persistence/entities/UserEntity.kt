@@ -30,7 +30,7 @@ class UserEntity(
     @JoinColumn(name = "players_id", referencedColumnName = "players_id", insertable = true, updatable = true, nullable = false)
     val shots: MutableSet<ShotEntity>,
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "player_roles", joinColumns = [JoinColumn(name = "players_id")])
     @Column(name = "`role`")
     val roles: MutableSet<String>
