@@ -1,6 +1,9 @@
 package ms.kotlin.battleships.app.websocket
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import ms.kotlin.battleships.app.security.TokenService
+import ms.kotlin.battleships.app.services.UserService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.messaging.converter.DefaultContentTypeResolver
 import org.springframework.messaging.converter.MappingJackson2MessageConverter
@@ -14,6 +17,12 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @Configuration
 @EnableWebSocketMessageBroker
 class WebSocketConfiguration: WebSocketMessageBrokerConfigurer {
+
+    @Autowired
+    private lateinit var tokenService: TokenService
+
+    @Autowired
+    private lateinit var userService: UserService
 
     override fun registerStompEndpoints(registry: StompEndpointRegistry) {
         registry.addEndpoint("/battleships").setAllowedOrigins("*")
@@ -30,7 +39,6 @@ class WebSocketConfiguration: WebSocketMessageBrokerConfigurer {
         registry.setApplicationDestinationPrefixes("/app/v1")
     }
 
-    //TODO
     override fun configureClientInboundChannel(registration: ChannelRegistration) {
         super.configureClientInboundChannel(registration)
     }
