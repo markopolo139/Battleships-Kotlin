@@ -34,8 +34,8 @@ class PersistenceTest {
     @Test
     fun `persistence entity save test`() {
 
-        val playerA = UserEntity(0, "marek", "zsk", "test", null, mutableSetOf(), mutableSetOf(), mutableSetOf("ADMIN"))
-        val playerB = UserEntity(0, "kamil", "zsk", "test2", null, mutableSetOf(), mutableSetOf(), mutableSetOf())
+        var playerA = UserEntity(0, "marko", "zsk", "test", null, mutableSetOf(), mutableSetOf(), mutableSetOf("ADMIN"))
+        var playerB = UserEntity(0, "kamil", "zsk", "test2", null, mutableSetOf(), mutableSetOf(), mutableSetOf())
 
         val shotSet = mutableSetOf(
             ShotEntity(1, 1,2, ShotType.MISS),
@@ -51,18 +51,18 @@ class PersistenceTest {
         )
 
         Assertions.assertDoesNotThrow {
-            userRepository.save(playerA)
-            userRepository.save(playerB)
+            playerA = userRepository.save(playerA)
+            playerB = userRepository.save(playerB)
         }
 
         playerA.shots.addAll(shotSet)
         Assertions.assertDoesNotThrow {
-            userRepository.save(playerA)
+            playerA = userRepository.save(playerA)
         }
 
         playerA.ships.addAll(shipSet)
         Assertions.assertDoesNotThrow {
-            userRepository.save(playerA)
+            playerA = userRepository.save(playerA)
         }
 
 
@@ -71,7 +71,7 @@ class PersistenceTest {
         }
 
         gameRepository.deleteAll()
-        userRepository.deleteAll()
+        userRepository.deleteAllById(listOf(playerA.id, playerB.id))
 
     }
 
