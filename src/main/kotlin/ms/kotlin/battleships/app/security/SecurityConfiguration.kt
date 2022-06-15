@@ -49,6 +49,7 @@ class SecurityConfiguration {
             .authorizeRequests()
             .antMatchers("/auth").permitAll()
             .antMatchers("/recoverpwd").permitAll()
+            .antMatchers("/battleships").permitAll()
             .anyRequest().authenticated()
 
 

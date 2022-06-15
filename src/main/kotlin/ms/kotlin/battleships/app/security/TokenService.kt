@@ -79,6 +79,27 @@ class TokenService {
         return null
     }
 
+    fun extractIdFromToken(token: String?): Int? {
+
+        if (token == null) return token
+
+        try{
+            return Jwts
+                .parserBuilder().configure().build()
+                .parseClaimsJws(token)
+                .body.subject.toInt()
+        }
+        catch (e: SignatureException) {
+            logger.warn("Token authentication failed due invalid signature")
+        } catch (e: ExpiredJwtException) {
+            logger.debug("Token authentication failed due to expired token")
+        } catch (e: JwtException) {
+            logger.debug("Token authentication failed due to exception: $e")
+        }
+
+        return null
+    }
+
     fun isRecoveryPasswordToken(): Boolean {
         val token: String = extractTokeFromRequest(currentRequest!!) ?: return false
 
