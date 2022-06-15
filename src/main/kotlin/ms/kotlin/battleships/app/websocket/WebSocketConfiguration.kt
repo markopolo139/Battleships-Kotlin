@@ -1,6 +1,7 @@
 package ms.kotlin.battleships.app.websocket
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import ms.kotlin.battleships.app.exception.InvalidTokenWebSocketException
 import ms.kotlin.battleships.app.security.TokenService
 import ms.kotlin.battleships.app.services.UserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -66,10 +67,13 @@ class WebSocketConfiguration: WebSocketMessageBrokerConfigurer {
                             sessionAttributes?.set(CsrfToken::class.java.name,
                                 DefaultCsrfToken("Auth-Token", "Auth-Token", token)
                             )
-                            val token = webSocketAuthService.authenticate(token)
+                            val auth = webSocketAuthService.authenticate(token)
 
-                            SecurityContextHolder.getContext().authentication = token
-                            accessor.user = token
+                            SecurityContextHolder.getContext().authentication = auth
+                            accessor.user = auth
+                        }
+                        else {
+                            throw InvalidTokenWebSocketException()
                         }
 
                     }
