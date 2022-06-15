@@ -22,7 +22,7 @@ class UserService: UserDetailsService {
     @Autowired
     private lateinit var  userRepository: UserRepository
 
-    private val userId = (SecurityContextHolder.getContext().authentication.principal as? AppUserEntity)?.id ?: 0
+    private val userId = (SecurityContextHolder.getContext()?.authentication?.principal as? AppUserEntity)?.id ?: 0
 
     override fun loadUserByUsername(username: String?): UserDetails {
         if (username == null) {
