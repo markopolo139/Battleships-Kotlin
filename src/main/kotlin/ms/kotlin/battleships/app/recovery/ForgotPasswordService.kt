@@ -42,15 +42,18 @@ class ForgotPasswordService {
     @Autowired
     private lateinit var templateEngine: TemplateEngine
 
-    private val userId = tokenService.extractIdFromToken() ?: throw InvalidTokenPasswordRecoveryException()
+    private val userId = tokenService.extractIdFromToken()
 
     fun sendEmail(email: String, serverPath: String) {
-        if (userRepository.findAll().count { it.email == email } != 1) {
+
+        val currentUser = userRepository.getByEmail(email)
+
+        if (currentUser == null) {
             logger.debug("Typed email $email is not saved in database")
             throw EmailNotFoundException(email)
         }
 
-        prepareEmail(email, tokenService.createPasswordRecoveryToken(userId), serverPath)
+        prepareEmail(email, tokenService.createPasswordRecoveryToken(currentUser.id), serverPath)
 
     }
 
@@ -88,7 +91,7 @@ class ForgotPasswordService {
             throw InvalidTokenPasswordRecoveryException()
         }
 
-        val user = userRepository.getReferenceById(userId).apply {
+        val user = userRepository.getReferenceById(userId ?: throw InvalidTokenPasswordRecoveryException()).apply {
             password = passwordEncoder.encode(newPassword)
         }
 
