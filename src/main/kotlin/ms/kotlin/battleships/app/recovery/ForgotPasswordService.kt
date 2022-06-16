@@ -63,7 +63,7 @@ class ForgotPasswordService {
            setVariable("sendPath", "$serverPath$EMAIL_PATH$token")
         }
         try{
-            val mimeMessageHelper = MimeMessageHelper(javaMailSender.createMimeMessage())
+            val mimeMessageHelper = MimeMessageHelper(javaMailSender.createMimeMessage(), true)
             mimeMessageHelper.setFrom(EMAIL_FROM)
             mimeMessageHelper.setSubject("Recovery password email")
             mimeMessageHelper.setTo(email)
