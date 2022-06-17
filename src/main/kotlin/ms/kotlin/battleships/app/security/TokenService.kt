@@ -29,9 +29,6 @@ class TokenService {
     @Autowired
     private lateinit var jwtConf: JwtConf
 
-    @Autowired
-    private lateinit var userService: UserService
-
     private val currentRequest: HttpServletRequest?
         get() = (RequestContextHolder.getRequestAttributes() as? ServletRequestAttributes)?.request
 

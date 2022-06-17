@@ -42,8 +42,6 @@ class ForgotPasswordService {
     @Autowired
     private lateinit var templateEngine: TemplateEngine
 
-    private val userId = tokenService.extractIdFromToken()
-
     fun sendEmail(email: String, serverPath: String) {
 
         val currentUser = userRepository.getByEmail(email)
@@ -91,7 +89,7 @@ class ForgotPasswordService {
             throw InvalidTokenPasswordRecoveryException()
         }
 
-        val user = userRepository.getReferenceById(userId ?: throw InvalidTokenPasswordRecoveryException()).apply {
+        val user = userRepository.getReferenceById(tokenService.extractIdFromToken() ?: throw InvalidTokenPasswordRecoveryException()).apply {
             password = passwordEncoder.encode(newPassword)
         }
 

@@ -57,7 +57,6 @@ class WebSocketConfiguration: WebSocketMessageBrokerConfigurer {
             object: ChannelInterceptor {
                 override fun preSend(message: Message<*>, channel: MessageChannel): Message<*>? {
                     val accessor: StompHeaderAccessor? = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor::class.java)
-                    println(accessor?.command ?: "NULL")
                     if (StompCommand.CONNECT == accessor?.command){
                         val token = accessor.getFirstNativeHeader("Auth-Token") ?: ""
                         logger.debug("Jwt token for websocket is $token")
