@@ -16,7 +16,7 @@ import kotlin.reflect.KClass
 )
 @Retention(AnnotationRetention.RUNTIME)
 @Constraint(validatedBy = [PasswordValidatorImpl::class])
-annotation class PasswordValidator(
+annotation class PasswordValidatorAnnotation(
     val message: String = "Invalid password (minLength - 5, no whitespaces," +
             " username can't be used as password, 1 uppercase, digit and special character)",
     val groups: Array<KClass<*>> = [],
