@@ -1,6 +1,7 @@
 package ms.kotlin.battleships.business.value
 
 import ms.kotlin.battleships.business.entity.Ship
+import ms.kotlin.battleships.business.exception.InvalidLayoutException
 
 enum class GameType {
 
@@ -25,7 +26,7 @@ enum class GameType {
 
     abstract val layout: Map<Int, Int>
 
-    fun validateLayout(ships: Set<Ship>): Boolean =
-        layout == ships.groupingBy { it.shipElements.size }.eachCount()
+    fun validateLayout(ships: Set<Ship>) =
+        if(layout != ships.groupingBy { it.shipElements.size }.eachCount()) throw InvalidLayoutException() else Unit
 
 }
