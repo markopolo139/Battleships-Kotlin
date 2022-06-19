@@ -2,6 +2,7 @@ package ms.kotlin.battleships.app.services
 
 import ms.kotlin.battleships.app.entities.AppShipEntity
 import ms.kotlin.battleships.app.entities.ShipElementEntity
+import ms.kotlin.battleships.app.exception.GameNotFoundException
 import ms.kotlin.battleships.app.persistence.entities.GameEntity
 import ms.kotlin.battleships.app.persistence.entities.ShipEntity
 import ms.kotlin.battleships.app.persistence.entities.UserEntity
@@ -127,7 +128,7 @@ class GameInteractor {
 
     }
 
-    private fun getGameEntity(): GameEntity = gameRepository.getByPlayerId(userId)
+    private fun getGameEntity(): GameEntity = gameRepository.getByPlayerId(userId) ?: throw GameNotFoundException()
 
     private fun getEnemyEntity(): UserEntity {
         val gameEntity = getGameEntity()
