@@ -1,6 +1,7 @@
 package ms.kotlin.battleships.business.value
 
 import ms.kotlin.battleships.business.entity.Ship
+import ms.kotlin.battleships.business.exception.InvalidLayoutException
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
@@ -50,8 +51,8 @@ class GameTypeTest {
             ),
         )
 
-        Assertions.assertTrue(GameType.CLASSIC.validateLayout(classicShips))
-        Assertions.assertFalse(GameType.RUSSIAN.validateLayout(classicShips))
+        Assertions.assertDoesNotThrow { GameType.CLASSIC.validateLayout(classicShips) }
+        Assertions.assertThrows(InvalidLayoutException::class.java) { GameType.RUSSIAN.validateLayout(classicShips) }
 
         val russianShips = setOf(
             Ship(
@@ -127,8 +128,8 @@ class GameTypeTest {
             ),
         )
 
-        Assertions.assertTrue(GameType.RUSSIAN.validateLayout(russianShips))
-        Assertions.assertFalse(GameType.CLASSIC.validateLayout(russianShips))
+        Assertions.assertDoesNotThrow { GameType.RUSSIAN.validateLayout(russianShips) }
+        Assertions.assertThrows(InvalidLayoutException::class.java) { GameType.CLASSIC.validateLayout(russianShips) }
 
     }
 
