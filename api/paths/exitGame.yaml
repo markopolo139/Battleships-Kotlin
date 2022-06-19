@@ -1,0 +1,11 @@
+summary: Allows user to exit current game (delete game from database)
+get:
+  operationId: exitGame
+  tags:
+    - game
+
+  responses:
+    '200':
+      description: Exited from game
+    default:
+      $ref: "../responses/ApiErrorResponse.yaml"

@@ -71,3 +71,6 @@ paths:
 
   /current/player/turn:
     $ref: "./paths/currentPlayerTurn.yaml"
+
+  /exit/game:
+    $ref: "./paths/exitGame.yaml"
