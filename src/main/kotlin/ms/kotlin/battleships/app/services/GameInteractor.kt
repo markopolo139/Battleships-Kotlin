@@ -15,6 +15,7 @@ import ms.kotlin.battleships.app.toModel
 import ms.kotlin.battleships.app.utils.toPositionMap
 import ms.kotlin.battleships.business.entity.ShipBoard
 import ms.kotlin.battleships.business.entity.ShotBoard
+import ms.kotlin.battleships.business.exception.*
 import ms.kotlin.battleships.business.service.GameService
 import ms.kotlin.battleships.web.models.PositionModel
 import ms.kotlin.battleships.web.models.response.ShotModel
@@ -22,9 +23,14 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
+import org.apache.logging.log4j.LogManager
 
 @Service
 class GameInteractor {
+
+    companion object {
+        private val logger = LogManager.getLogger()
+    }
 
     private val gameService = GameService()
 
@@ -45,21 +51,31 @@ class GameInteractor {
         val enemy = getEnemyEntity()
         val gameEntity = getGameEntity()
 
-        val madeShot = gameService.makeShot(
-            positionModel.toApp(),
-            ShotBoard(player.shots.map { it.toEntity() }.toSet().toPositionMap()),
-            ShipBoard(enemy.ships.map { it.toEntity() }.toSet(), gameEntity.gameType)
-        )
+        try {
+            val madeShot = gameService.makeShot(
+                positionModel.toApp(),
+                ShotBoard(player.shots.map { it.toEntity() }.toSet().toPositionMap()),
+                ShipBoard(enemy.ships.map { it.toEntity() }.toSet(), gameEntity.gameType)
+            )
 
-        userRepository.save(player)
+            userRepository.save(player)
 
-        simpMessagingTemplate.convertAndSendToUser(
-            player.username, "/queue/shot/board", ShotModel(madeShot.position.toModel(), madeShot.shotType.name)
-        )
-        simpMessagingTemplate.convertAndSendToUser(
-            enemy.username, "/queue/ship/board", ShotModel(madeShot.position.toModel(), madeShot.shotType.name)
-        )
+            simpMessagingTemplate.convertAndSendToUser(
+                player.username, "/queue/shot/board", ShotModel(madeShot.position.toModel(), madeShot.shotType.name)
+            )
+            simpMessagingTemplate.convertAndSendToUser(
+                enemy.username, "/queue/ship/board", ShotModel(madeShot.position.toModel(), madeShot.shotType.name)
+            )
 
+        }
+        catch (ex: InvalidShotException) {
+            logger.error("$positionModel was already in database")
+            throw ex
+        }
+        catch (ex: PositionOutOfRangeException) {
+            logger.error("$positionModel is out of range")
+            throw ex
+        }
     }
 
     fun placeShips(positions: List<List<PositionModel>>) {
@@ -74,12 +90,36 @@ class GameInteractor {
                 shipElements.add(ShipElementEntity(position.toApp()))
 
             val ship = AppShipEntity(0, shipElements)
-            ship.validate()
+            try {
+                ship.validate()
+            }
+            catch (ex: ShipContinuityException) {
+                logger.error("$ship, is not continued")
+                throw ex
+            }
+            catch (ex: ShipInvalidRowException) {
+                logger.error("$ship, is not placed in one row")
+                throw ex
+            }
+            catch (ex: InvalidShipException) {
+                logger.error("$ship, is invalid")
+                throw ex
+            }
             shipList.add(ship)
         }
 
         val shipBoard = ShipBoard(shipList.toSet(), gameEntity.gameType )
-        shipBoard.validate()
+        try {
+            shipBoard.validate()
+        }
+        catch (ex: InvalidShipException) {
+            logger.error("Ships in list overlaps")
+            throw ex
+        }
+        catch (ex: InvalidLayoutException) {
+            logger.error("Ships are not in correct layout")
+            throw ex
+        }
 
         player.ships.addAll(shipList.map { it.toPersistence() })
 
