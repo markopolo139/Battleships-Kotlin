@@ -34,6 +34,9 @@ class SecurityConfiguration {
     @Autowired
     private lateinit var tokenService: TokenService
 
+    @Autowired
+    private lateinit var passwordEncoder: PasswordEncoder
+
     @Bean
     fun securityFilterChain(http: HttpSecurity?): SecurityFilterChain? {
         if (http == null) return null
@@ -67,14 +70,11 @@ class SecurityConfiguration {
     @Scope(value = "singleton")
     fun authenticationProvider(): AuthenticationProvider {
         val daoAuthenticationProvider = DaoAuthenticationProvider()
-        daoAuthenticationProvider.setPasswordEncoder(getPasswordEncoder())
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder)
         daoAuthenticationProvider.setUserDetailsService(userService)
 
         return daoAuthenticationProvider
     }
-
-    @Bean
-    fun getPasswordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
     @Bean
     @Scope(value = "singleton")
