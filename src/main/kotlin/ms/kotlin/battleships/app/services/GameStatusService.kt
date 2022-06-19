@@ -31,8 +31,8 @@ class GameStatusService {
 
     private val gameService = GameService()
 
-    private val userId = (SecurityContextHolder.getContext()?.authentication?.principal as? AppUserEntity)?.id
-        ?: throw InvalidAuthenticationException("Can't get id from security context holder")
+    private val userId
+        get() = (SecurityContextHolder.getContext()?.authentication?.principal as? AppUserEntity)?.id!!
 
     fun getShotBoard(): List<ShotModel> = userRepository.getReferenceById(userId).shots.map {it.toEntity().toModel() }
 
