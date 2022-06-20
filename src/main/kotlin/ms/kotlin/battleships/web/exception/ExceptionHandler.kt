@@ -1,5 +1,6 @@
 package ms.kotlin.battleships.web.exception
 
+import ms.kotlin.battleships.app.exception.*
 import ms.kotlin.battleships.business.exception.*
 import ms.kotlin.battleships.business.value.Position
 import org.springframework.beans.factory.annotation.Autowired
@@ -7,6 +8,7 @@ import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException
+import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.MissingServletRequestParameterException
 import org.springframework.web.bind.annotation.ControllerAdvice
@@ -153,5 +155,91 @@ class ExceptionHandler: ResponseEntityExceptionHandler() {
             error = ex.message ?: "Ship is invalid",
             httpStatus = HttpStatus.BAD_REQUEST
         )
+
+    @ExceptionHandler(BadCredentialsException::class)
+    fun badCredentialsExceptionHandler(ex: BadCredentialsException): ResponseEntity<ApiError> =
+        error(
+            action = "Check again login and password",
+            error = ex.message ?: "Invalid credentials",
+            httpStatus = HttpStatus.BAD_REQUEST
+        )
+
+    @ExceptionHandler(NoSuchElementException::class)
+    fun noSuchElementExceptionHandler(ex: NoSuchElementException): ResponseEntity<ApiError> =
+        error(
+            error = ex.message ?: "Element not found",
+            httpStatus = HttpStatus.BAD_REQUEST
+        )
+
+    @ExceptionHandler(EmailNotFoundException::class)
+    fun emailNotFoundExceptionHandler(ex: EmailNotFoundException): ResponseEntity<ApiError> =
+        error(
+            action = "Type correct email",
+            error = ex.message ?: "Invalid email",
+            httpStatus = HttpStatus.BAD_REQUEST
+        )
+
+    @ExceptionHandler(GameNotFoundException::class)
+    fun gameNotFoundExceptionHandler(ex: GameNotFoundException): ResponseEntity<ApiError> =
+        error(
+            action = "Create game before getting it",
+            error = ex.message ?: "Game not found",
+            httpStatus = HttpStatus.BAD_REQUEST
+        )
+
+    @ExceptionHandler(InvalidAuthenticationException::class)
+    fun invalidAuthenticationExceptionHandler(ex: InvalidAuthenticationException): ResponseEntity<ApiError> =
+        error(
+            error = ex.message ?: "Invalid authentication",
+            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR
+        )
+
+    @ExceptionHandler(InvalidJoinGameTokenException::class)
+    fun invalidJoinGameTokenExceptionHandler(ex: InvalidJoinGameTokenException): ResponseEntity<ApiError> =
+        error(
+            action = "Check if token is typed correctly",
+            error = ex.message ?: "Invalid join game token",
+            httpStatus = HttpStatus.BAD_REQUEST
+        )
+
+    @ExceptionHandler(InvalidTokenPasswordRecoveryException::class)
+    fun invalidTokenPasswordRecoveryExceptionHandler(ex: InvalidTokenPasswordRecoveryException): ResponseEntity<ApiError> =
+        error(
+            action = "Check if token is typed correctly",
+            error = ex.message ?: "Invalid recovery password token",
+            httpStatus = HttpStatus.BAD_REQUEST
+        )
+
+    @ExceptionHandler(InvalidTokenWebSocketException::class)
+    fun invalidTokenWebSocketExceptionHandler(ex: InvalidTokenWebSocketException): ResponseEntity<ApiError> =
+        error(
+            action = "Check if token is typed correctly",
+            error = ex.message ?: "Invalid token used in web socket",
+            httpStatus = HttpStatus.BAD_REQUEST
+        )
+
+    @ExceptionHandler(MailCreationException::class)
+    fun mailCreationExceptionHandler(ex: MailCreationException): ResponseEntity<ApiError> =
+        error(
+            error = ex.message ?: "Could not send mail",
+            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR
+        )
+
+    @ExceptionHandler(UserAlreadyInGameException::class)
+    fun userAlreadyInGameExceptionHandler(ex: UserAlreadyInGameException): ResponseEntity<ApiError> =
+        error(
+            action = "Finish or exit game, before starting new one",
+            error = ex.message ?: "User already in game",
+            httpStatus = HttpStatus.BAD_REQUEST
+        )
+
+    @ExceptionHandler(UsernameNotFoundException::class)
+    fun usernameNotFoundExceptionHandler(ex: UsernameNotFoundException): ResponseEntity<ApiError> =
+        error(
+            action = "Check if username is typed correctly",
+            error = ex.message ?: "Given username is not found in database",
+            httpStatus = HttpStatus.BAD_REQUEST
+        )
+
 
 }
