@@ -19,7 +19,8 @@ interface UserRepository: JpaRepository<UserEntity, Int> {
 
     @Modifying
     @Transactional
-    @Query(value = "delete s, s2 from shots s, ships s2 where s.players_id = :playerId", nativeQuery = true)
+    @Query(value = "delete from s1, s2 using shots s1 inner join ships s2 on s1.players_id = s2.players_id" +
+            " where s1.players_id = :playerId", nativeQuery = true)
     fun deleteShipsAndShots(@Param(value = "playerId") playerId: Int)
 
 }
