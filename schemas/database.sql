@@ -22,7 +22,7 @@ CREATE TABLE ships(
     ships_id int not null primary key auto_increment,
     players_id int not null,
     key (players_id),
-    constraint ship_to_player foreign key (players_id) references players(players_id)
+    constraint ship_to_player foreign key (players_id) references players(players_id) on delete CASCADE
 );
 
 CREATE TABLE ship_elements(
@@ -30,7 +30,7 @@ CREATE TABLE ship_elements(
     pos_x int not null,
     pos_y int not null,
     key(ships_id),
-    constraint ship_element_to_ship foreign key (ships_id) references ships(ships_id)
+    constraint ship_element_to_ship foreign key (ships_id) references ships(ships_id) on delete CASCADE
 );
 
 CREATE TABLE shots (
@@ -40,7 +40,7 @@ CREATE TABLE shots (
     type ENUM('HIT', 'MISS') not null,
     players_id int not null,
     key (players_id),
-    constraint shot_to_player foreign key (players_id) references players (players_id)
+    constraint shot_to_player foreign key (players_id) references players (players_id) on delete CASCADE
 );
 
 CREATE TABLE games(
@@ -52,9 +52,9 @@ CREATE TABLE games(
     key (player_a_id),
     key (player_b_id),
     key (current_player_id),
-    constraint player_a_to_players foreign key (player_a_id) references players(players_id),
-    constraint player_b_to_players foreign key (player_b_id) references players(players_id),
-    constraint current_player_to_players foreign key (current_player_id) references players(players_id)
+    constraint player_a_to_players foreign key (player_a_id) references players(players_id) on delete NO ACTION,
+    constraint player_b_to_players foreign key (player_b_id) references players(players_id) on delete NO ACTION,
+    constraint current_player_to_players foreign key (current_player_id) references players(players_id) on delete NO ACTION
 );
 
 insert into players values (1,'marek', '$2a$12$G//VXe476Iw53pjiWCOeTeYCbGUMGmOxu4HykQ7Q1ndjOzke5NMtu','marekseget@onet.pl',null);

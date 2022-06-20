@@ -73,6 +73,17 @@ class PersistenceTest {
         gameRepository.deleteAll()
         userRepository.deleteAllById(listOf(playerA.id, playerB.id))
 
+        var playerC = UserEntity(0, "test2", "zsk", "test3", null, mutableSetOf(
+            ShipEntity(0, setOf(ShipElementEmbeddable(1,2)))
+        ), mutableSetOf(
+            ShotEntity(0, 1, 1, ShotType.HIT)
+        ), mutableSetOf("ADMIN"))
+
+        playerC = userRepository.save(playerC)
+
+        userRepository.deleteShipsAndShots(playerC.id)
+
+        userRepository.deleteById(playerC.id)
     }
 
 }

@@ -53,11 +53,8 @@ class GameStatusService {
         )
 
         if (gameStatus) {
-            enemy.shots.clear()
-            enemy.ships.clear()
-            player.shots.clear()
-            player.ships.clear()
-            userRepository.saveAll(listOf(player, enemy))
+            userRepository.deleteShipsAndShots(player.id)
+            userRepository.deleteShipsAndShots(enemy.id)
             gameRepository.delete(getGameEntity())
         }
 

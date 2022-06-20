@@ -1,5 +1,6 @@
 package ms.kotlin.battleships.app.services
 
+import ms.kotlin.battleships.app.exception.GameNotFoundException
 import ms.kotlin.battleships.app.exception.InvalidJoinGameTokenException
 import ms.kotlin.battleships.app.exception.UserAlreadyInGameException
 import ms.kotlin.battleships.app.persistence.entities.GameEntity
@@ -60,6 +61,24 @@ class JoinGameService {
         gameRepository.save(
             GameEntity(0, gameType, playerA, playerB, if(randomTurn()) playerA else playerB)
         )
+
+    }
+
+    fun exitGame() {
+
+        val gameEntity = gameRepository.getByPlayerId(userId) ?: throw GameNotFoundException()
+        gameEntity.playerA.apply {
+            ships.clear()
+            shots.clear()
+        }
+        gameEntity.playerB.apply {
+            ships.clear()
+            shots.clear()
+        }
+
+        userRepository.deleteShipsAndShots(gameEntity.playerA.id)
+        userRepository.deleteShipsAndShots(gameEntity.playerB.id)
+        gameRepository.delete(gameEntity)
 
     }
 
