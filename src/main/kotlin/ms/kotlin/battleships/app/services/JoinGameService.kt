@@ -67,14 +67,6 @@ class JoinGameService {
     fun exitGame() {
 
         val gameEntity = gameRepository.getByPlayerId(userId) ?: throw GameNotFoundException()
-        gameEntity.playerA.apply {
-            ships.clear()
-            shots.clear()
-        }
-        gameEntity.playerB.apply {
-            ships.clear()
-            shots.clear()
-        }
 
         userRepository.deleteShipsAndShots(gameEntity.playerA.id)
         userRepository.deleteShipsAndShots(gameEntity.playerB.id)
