@@ -15,6 +15,13 @@ get:
   operationId: createJoinGameToken
   tags:
     - game
+  requestBody:
+    description: Body used for creating join game token
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas/GameType.yaml"
+    required: true
   responses:
     '200':
       $ref: "../responses/TokenResponse.yaml"
