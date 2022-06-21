@@ -30,11 +30,14 @@ class ShipEntity(
         other as ShipEntity
 
         if (id != other.id) return false
+        if (shipElements != other.shipElements) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return id
+        var result = id.hashCode()
+        result = 31 * result + shipElements.hashCode()
+        return result
     }
 }

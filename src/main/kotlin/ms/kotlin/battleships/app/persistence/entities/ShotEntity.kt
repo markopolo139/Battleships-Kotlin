@@ -22,7 +22,6 @@ class ShotEntity(
     val shotType: ShotType
 
 ) {
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -30,11 +29,18 @@ class ShotEntity(
         other as ShotEntity
 
         if (id != other.id) return false
+        if (x != other.x) return false
+        if (y != other.y) return false
+        if (shotType != other.shotType) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return id
+        var result = id.hashCode()
+        result = 31 * result + x.hashCode()
+        result = 31 * result + y.hashCode()
+        result = 31 * result + shotType.hashCode()
+        return result
     }
 }
