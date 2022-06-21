@@ -51,6 +51,7 @@ class SecurityConfiguration {
             .userDetailsService(userService)
             .authorizeRequests()
             .antMatchers("/auth").permitAll()
+            .antMatchers("/register").permitAll()
             .antMatchers("/recoverpwd").permitAll()
             .antMatchers("/battleships").permitAll()
             .anyRequest().authenticated()

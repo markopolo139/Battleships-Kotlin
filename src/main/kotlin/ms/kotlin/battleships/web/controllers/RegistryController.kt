@@ -19,7 +19,7 @@ class RegistryController {
     private lateinit var userService: UserService
 
     @PostMapping("/register")
-    fun register(@RequestBody registryModel: RegistryModel) {
+    fun register(@RequestBody @Valid registryModel: RegistryModel) {
         userService.createUser(registryModel)
     }
 
