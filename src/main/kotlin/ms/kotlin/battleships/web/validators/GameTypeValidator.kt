@@ -15,9 +15,9 @@ import kotlin.reflect.KClass
     AnnotationTarget.CONSTRUCTOR
 )
 @Retention(AnnotationRetention.RUNTIME)
-@Constraint(validatedBy = [ShotTypeValidatorImpl::class])
-annotation class ShotTypeValidator(
-    val message: String = "Invalid shot type name",
+@Constraint(validatedBy = [GameTypeValidatorImpl::class])
+annotation class GameTypeValidator(
+    val message: String = "Invalid game type name",
     val groups: Array<KClass<*>> = [],
     val payload: Array<KClass<out Payload>> = []
 )
