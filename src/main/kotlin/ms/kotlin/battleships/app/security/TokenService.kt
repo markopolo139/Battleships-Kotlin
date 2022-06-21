@@ -106,14 +106,12 @@ class TokenService {
             .body.get(Claims.PASSWORD_RECOVERY.value, Boolean::class.javaObjectType) ?: false
     }
 
-    fun getGameTypeFromToken(): GameType? {
-        val token: String = extractTokeFromRequest(currentRequest!!) ?: return null
-
-        return Jwts
+    fun getGameTypeFromToken(token: String): String? =
+        Jwts
             .parserBuilder().configure().build()
             .parseClaimsJws(token)
-            .body.get(Claims.JOIN_GAME.value, GameType::class.javaObjectType) ?: null
-    }
+            .body.get(Claims.JOIN_GAME.value, String::class.javaObjectType) ?: null
+
 
     private fun extractTokeFromRequest(request: HttpServletRequest): String? {
         val authorizationHeader: String = request.getHeader(HttpHeaders.AUTHORIZATION) ?: return null

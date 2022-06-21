@@ -45,7 +45,7 @@ class JoinGameService {
 
     fun joinGame(joinGameToken: String) {
         validateIfUserIsInGame()
-        val gameType = tokenService.getGameTypeFromToken()
+        val gameType = tokenService.getGameTypeFromToken(joinGameToken)
 
         if (gameType == null) {
             logger.error("Game type wasn't found in joinGameToken")
@@ -59,7 +59,7 @@ class JoinGameService {
         val playerB = userRepository.getReferenceById(userId)
 
         gameRepository.save(
-            GameEntity(0, gameType, playerA, playerB, if(randomTurn()) playerA else playerB)
+            GameEntity(0, GameType.valueOf(gameType), playerA, playerB, if(randomTurn()) playerA else playerB)
         )
 
     }
