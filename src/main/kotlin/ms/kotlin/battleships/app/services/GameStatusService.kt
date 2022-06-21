@@ -53,8 +53,10 @@ class GameStatusService {
         )
 
         if (gameStatus) {
-            userRepository.deleteShipsAndShots(player.id)
-            userRepository.deleteShipsAndShots(enemy.id)
+            userRepository.deleteShips(player.id)
+            userRepository.deleteShots(player.id)
+            userRepository.deleteShips(enemy.id)
+            userRepository.deleteShots(enemy.id)
             gameRepository.delete(getGameEntity())
         }
 

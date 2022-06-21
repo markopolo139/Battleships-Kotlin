@@ -45,9 +45,9 @@ class PersistenceTest {
         )
 
         val shipSet = mutableSetOf(
-            ShipEntity(1, setOf(ShipElementEmbeddable(1,2), ShipElementEmbeddable(2,2))),
-            ShipEntity(2, setOf(ShipElementEmbeddable(2,3), ShipElementEmbeddable(3,3))),
-            ShipEntity(3, setOf(ShipElementEmbeddable(1,1), ShipElementEmbeddable(1,2))),
+            ShipEntity(0, setOf(ShipElementEmbeddable(1,2), ShipElementEmbeddable(2,2))),
+            ShipEntity(0, setOf(ShipElementEmbeddable(2,3), ShipElementEmbeddable(3,3))),
+            ShipEntity(0, setOf(ShipElementEmbeddable(1,3), ShipElementEmbeddable(1,4))),
         )
 
         Assertions.assertDoesNotThrow {
