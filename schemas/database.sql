@@ -58,3 +58,4 @@ CREATE TABLE games(
 );
 
 insert into players values (1,'marek', '$2a$12$G//VXe476Iw53pjiWCOeTeYCbGUMGmOxu4HykQ7Q1ndjOzke5NMtu','marekseget@onet.pl',null);
+insert into player_roles values (1,'ADMIN');

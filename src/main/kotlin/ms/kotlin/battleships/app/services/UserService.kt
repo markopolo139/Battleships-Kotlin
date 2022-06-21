@@ -9,6 +9,7 @@ import ms.kotlin.battleships.app.utils.toPersistence
 import ms.kotlin.battleships.web.models.request.RegistryModel
 import org.apache.logging.log4j.LogManager
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -66,5 +67,10 @@ class UserService: UserDetailsService {
             password = passwordEncoder.encode(password)
         }
     )
+
+    @PreAuthorize("hasRole('ADMIN')")
+    fun deleteByUsername(username: String) {
+        userRepository.deleteByUsername(username)
+    }
 
 }

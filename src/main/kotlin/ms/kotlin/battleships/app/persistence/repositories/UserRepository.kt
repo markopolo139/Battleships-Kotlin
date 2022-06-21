@@ -23,4 +23,8 @@ interface UserRepository: JpaRepository<UserEntity, Int> {
             " where s1.players_id = :playerId", nativeQuery = true)
     fun deleteShipsAndShots(@Param(value = "playerId") playerId: Int)
 
+    @Modifying
+    @Transactional
+    fun deleteByUsername(username: String)
+
 }
