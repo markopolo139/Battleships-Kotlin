@@ -19,6 +19,7 @@ import ms.kotlin.battleships.business.entity.ShipBoard
 import ms.kotlin.battleships.business.entity.ShotBoard
 import ms.kotlin.battleships.business.exception.*
 import ms.kotlin.battleships.business.service.GameService
+import ms.kotlin.battleships.business.value.ShotType
 import ms.kotlin.battleships.web.models.PositionModel
 import ms.kotlin.battleships.web.models.response.ShotModel
 import org.springframework.beans.factory.annotation.Autowired
@@ -49,6 +50,7 @@ class GameInteractor {
     private val userId
         get() = (SecurityContextHolder.getContext()?.authentication?.principal as? AppUserEntity )?.id!!
 
+    //TODO : validate if both players have placed ships and if it is current player turn
     @Transactional
     fun makeShot(positionModel: PositionModel) {
         val player = userRepository.getReferenceById(userId)
@@ -63,7 +65,13 @@ class GameInteractor {
             )
 
             player.shots.add(AppShotEntity(0, madeShot.position, madeShot.shotType).toPersistence())
+
             userRepository.save(player)
+
+            if (madeShot.shotType == ShotType.MISS) {
+                gameEntity.currentPlayer = enemy
+                gameRepository.save(gameEntity)
+            }
 
             simpMessagingTemplate.convertAndSendToUser(
                 player.username, "/queue/shot/board", ShotModel(madeShot.position.toModel(), madeShot.shotType.name)
