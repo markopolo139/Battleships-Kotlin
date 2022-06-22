@@ -1,6 +1,7 @@
 package ms.kotlin.battleships.app.services
 
 import ms.kotlin.battleships.app.entities.AppShipEntity
+import ms.kotlin.battleships.app.entities.AppShotEntity
 import ms.kotlin.battleships.app.entities.ShipElementEntity
 import ms.kotlin.battleships.app.exception.GameNotFoundException
 import ms.kotlin.battleships.app.persistence.entities.GameEntity
@@ -25,6 +26,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import org.apache.logging.log4j.LogManager
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class GameInteractor {
@@ -47,6 +49,7 @@ class GameInteractor {
     private val userId
         get() = (SecurityContextHolder.getContext()?.authentication?.principal as? AppUserEntity )?.id!!
 
+    @Transactional
     fun makeShot(positionModel: PositionModel) {
         val player = userRepository.getReferenceById(userId)
         val enemy = getEnemyEntity()
@@ -59,6 +62,7 @@ class GameInteractor {
                 ShipBoard(enemy.ships.map { it.toEntity() }.toSet(), gameEntity.gameType)
             )
 
+            player.shots.add(AppShotEntity(0, madeShot.position, madeShot.shotType).toPersistence())
             userRepository.save(player)
 
             simpMessagingTemplate.convertAndSendToUser(
