@@ -25,7 +25,6 @@ class GameController {
         gameInteractor.placeShips(positionShipPayload.positionList)
     }
 
-    //TODO : Test
     @MessageMapping("/make/shot")
     fun makeShot(@Valid positionModel: PositionModel) {
         gameInteractor.makeShot(positionModel)

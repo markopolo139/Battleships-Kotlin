@@ -2,12 +2,11 @@ package ms.kotlin.battleships.app.recovery
 
 import ms.kotlin.battleships.app.exception.EmailNotFoundException
 import ms.kotlin.battleships.app.exception.InvalidTokenPasswordRecoveryException
-import ms.kotlin.battleships.app.exception.MailCreationException
 import ms.kotlin.battleships.app.persistence.repositories.UserRepository
 import ms.kotlin.battleships.app.security.TokenService
-import org.apache.juli.logging.LogFactory
 import org.apache.logging.log4j.LogManager
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.mail.MailException
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
@@ -16,16 +15,18 @@ import org.springframework.stereotype.Service
 import org.thymeleaf.TemplateEngine
 import org.thymeleaf.context.Context
 import java.io.File
-import javax.mail.internet.MimeMessage
 
 @Service
 class ForgotPasswordService {
 
     companion object {
         private val logger = LogManager.getLogger()
-        private const val  EMAIL_FROM = "springtest1@onet.pl"
+
         private const val  EMAIL_PATH = "/api/v1/change/password?token="
     }
+
+    @Value("\${spring.mail.username}")
+    private lateinit var emailFrom: String
 
     @Autowired
     private lateinit var userRepository: UserRepository
@@ -60,9 +61,10 @@ class ForgotPasswordService {
         val context = Context().apply {
            setVariable("sendPath", "$serverPath$EMAIL_PATH$token")
         }
+
         try{
             val mimeMessageHelper = MimeMessageHelper(javaMailSender.createMimeMessage(), true)
-            mimeMessageHelper.setFrom(EMAIL_FROM)
+            mimeMessageHelper.setFrom(emailFrom, "Spring assistant")
             mimeMessageHelper.setSubject("Recovery password email")
             mimeMessageHelper.setTo(email)
 
@@ -75,10 +77,11 @@ class ForgotPasswordService {
         }
         catch (ex: MailException) {
             logger.info("Email could not be sent, because error occurred")
-            throw MailCreationException()
+            throw ex
         }
-
-
+        catch (ex: Exception) {
+            throw ex
+        }
 
     }
 
