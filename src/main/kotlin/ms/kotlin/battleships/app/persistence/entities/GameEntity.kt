@@ -17,7 +17,7 @@ class GameEntity(
     @Column(name = "game_type")
     val gameType: GameType,
 
-    @OneToOne(cascade = [CascadeType.MERGE])
+    @OneToOne
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(name = "player_a_id")
     val playerA: UserEntity,
@@ -27,7 +27,7 @@ class GameEntity(
     @JoinColumn(name = "player_b_id")
     val playerB: UserEntity,
 
-    @OneToOne(cascade = [CascadeType.MERGE])
+    @OneToOne
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(name = "current_player_id")
     var currentPlayer: UserEntity,

@@ -4,6 +4,8 @@ import ms.kotlin.battleships.app.entities.AppShipEntity
 import ms.kotlin.battleships.app.entities.AppShotEntity
 import ms.kotlin.battleships.app.entities.ShipElementEntity
 import ms.kotlin.battleships.app.exception.GameNotFoundException
+import ms.kotlin.battleships.app.exception.NotCurrentTurnException
+import ms.kotlin.battleships.app.exception.ShipsNotPlacedException
 import ms.kotlin.battleships.app.persistence.entities.GameEntity
 import ms.kotlin.battleships.app.persistence.entities.ShipEntity
 import ms.kotlin.battleships.app.persistence.entities.UserEntity
@@ -50,12 +52,17 @@ class GameInteractor {
     private val userId
         get() = (SecurityContextHolder.getContext()?.authentication?.principal as? AppUserEntity )?.id!!
 
-    //TODO : validate if both players have placed ships and if it is current player turn
     @Transactional
     fun makeShot(positionModel: PositionModel) {
         val player = userRepository.getReferenceById(userId)
         val enemy = getEnemyEntity()
         val gameEntity = getGameEntity()
+
+        if(player.ships.isEmpty() || enemy.ships.isEmpty())
+            throw ShipsNotPlacedException()
+
+        if(userId != gameEntity.currentPlayer.id)
+            throw NotCurrentTurnException()
 
         try {
             val madeShot = gameService.makeShot(

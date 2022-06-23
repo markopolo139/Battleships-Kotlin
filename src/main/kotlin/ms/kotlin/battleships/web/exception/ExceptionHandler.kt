@@ -241,5 +241,21 @@ class ExceptionHandler: ResponseEntityExceptionHandler() {
             httpStatus = HttpStatus.BAD_REQUEST
         )
 
+    @ExceptionHandler(NotCurrentTurnException::class)
+    fun notCurrentTurnExceptionHandler(ex: NotCurrentTurnException): ResponseEntity<ApiError> =
+        error(
+            action = "Wait for your turn",
+            error = ex.message ?: "not your turn",
+            httpStatus = HttpStatus.BAD_REQUEST
+        )
+
+    @ExceptionHandler(ShipsNotPlacedException::class)
+    fun shipsNotPlacedExceptionHandler(ex: ShipsNotPlacedException): ResponseEntity<ApiError> =
+        error(
+            action = "Place ships before making shot",
+            error = ex.message ?: "Ships not placed",
+            httpStatus = HttpStatus.BAD_REQUEST
+        )
+
 
 }
